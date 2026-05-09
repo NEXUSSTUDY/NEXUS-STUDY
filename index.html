@@ -607,7 +607,7 @@
         let otpTimestamp = null;
 
         // Editable Images Registry
-        const editableImages = [
+        const editableImages =[
             { id: "hero-bg-image", label: "Hero Background", isBg: true },
             { id: "feature-img-1", label: "Expert Faculty", isBg: false },
             { id: "feature-img-2", label: "Premium Notes", isBg: false },
@@ -674,7 +674,9 @@
                 emailjs.init(EMAILJS_PUBLIC_KEY);
                 await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
                     to_email: email,
-                    passcode: generatedOTP,
+                    passcode: generatedOTP, // Agar template me {{passcode}} hai
+                    otp: generatedOTP,      // Agar template me {{otp}} hai
+                    message: generatedOTP,  // Agar template me {{message}} hai
                     company: "NEXUS STUDY ADMIN"
                 });
 
@@ -685,6 +687,7 @@
             } catch (error) {
                 msgEl.textContent = "Failed to send OTP. Try again.";
                 msgEl.style.color = "#ff3b30";
+                console.error("EmailJS Error:", error);
             }
         }
 
